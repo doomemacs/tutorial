@@ -1,15 +1,43 @@
 #+TITLE: DOOM Interactive Org Docs
 
-* What is it?
+** What is it?
 Using org-mode we can create an interactive guide to doom and emacs that helps
 users really learn the workflows to be productive in doom. It's really important
 they get that ":bulb: aha!" moment where they see that everything in emacs is
 going to be a var, a function, or specifying when to set a var or function. This
 interactive guide should showcase the cause → effect relationship.
 * The Plan
-1. Collect the docs pretty loosely and focus on containing as many small but meaningful files as possible
+1. Collect the docs pretty loosely and focus on containing as many small but
+   meaningful files as possible
 2. Reorgnaize those smaller docs into larger structured files
 3. Publish
+* Technical Obstacles
+** Evaluating gui emacs-lisp in org-mode
+Unfortuantely, you can't just eval an emacs-lisp source block to perform most UI
+operations:
+#+BEGIN_EXAMPLE org
+,#+BEGIN_SRC emacs-lisp
+(evil-window-vsplit)
+,#+END_SRC
+#+END_EXAMPLE
+The solution is to create an org-babel language that's based on emacs-lisp with
+a custom eval function. This registers an emacs-lisp-config that uses the same syntax and behaviors as emacs-lisp but allows you to run commands like `(evil-window-vsplit)`.
+
+Current proposal is to create a doom PR to add this as a default
+*** Function to execute emacs-lisp src blocks
+#+BEGIN_SRC emacs-lisp :results silent
+(defun org-babel-execute:emacs-lisp-config (body params)
+  "Execute a block of emacs-lisp code with Babel."
+  (cl-letf (((symbol-function 'current-window-configuration) #'ignore)
+            ((symbol-function 'set-window-configuration) #'ignore))
+    (org-babel-execute:emacs-lisp body params)))
+#+END_SRC
+
+*** Added emacs-lisp-config to org-babel using emacs-lisp as base
+#+BEGIN_SRC emacs-lisp :results silent
+(after! org
+  (add-to-list 'org-src-lang-modes '("emacs-lisp-config" . emacs-lisp)))
+#+END_SRC
 * Organization
 How often have you opened a new file then found it difficult to think through
 what to put down and how to organize it? Rather than trying to come up with a
