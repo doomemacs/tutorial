@@ -6,13 +6,13 @@ users really learn the workflows to be productive in doom. It's really important
 they get that ":bulb: aha!" moment where they see that everything in emacs is
 going to be a var, a function, or specifying when to set a var or function. This
 interactive guide should showcase the cause → effect relationship.
-* The Plan
+** The Plan
 1. Collect the docs pretty loosely and focus on containing as many small but
    meaningful files as possible
 2. Reorgnaize those smaller docs into larger structured files
 3. Publish
-* Technical Obstacles
-** Evaluating gui emacs-lisp in org-mode
+** Technical Obstacles
+*** Evaluating gui emacs-lisp in org-mode
 Unfortuantely, you can't just eval an emacs-lisp source block to perform most UI
 operations:
 #+BEGIN_EXAMPLE org
@@ -24,7 +24,7 @@ The solution is to create an org-babel language that's based on emacs-lisp with
 a custom eval function. This registers an emacs-lisp-config that uses the same syntax and behaviors as emacs-lisp but allows you to run commands like `(evil-window-vsplit)`.
 
 Current proposal is to create a doom PR to add this as a default
-*** Function to execute emacs-lisp src blocks
+**** Function to execute emacs-lisp src blocks
 #+BEGIN_SRC emacs-lisp :results silent
 (defun org-babel-execute:emacs-lisp-config (body params)
   "Execute a block of emacs-lisp code with Babel."
@@ -33,12 +33,12 @@ Current proposal is to create a doom PR to add this as a default
     (org-babel-execute:emacs-lisp body params)))
 #+END_SRC
 
-*** Added emacs-lisp-config to org-babel using emacs-lisp as base
+**** Added emacs-lisp-config to org-babel using emacs-lisp as base
 #+BEGIN_SRC emacs-lisp :results silent
 (after! org
   (add-to-list 'org-src-lang-modes '("emacs-lisp-config" . emacs-lisp)))
 #+END_SRC
-* Organization
+** Organization
 How often have you opened a new file then found it difficult to think through
 what to put down and how to organize it? Rather than trying to come up with a
 structure then shove everything into it, lets collect small but meaningful
@@ -51,11 +51,11 @@ doc for it.
 - Once we have a good base, we can start just collecting additions into their
   structured docs
 - Might be worth considering using this folder as a separate org-roam directory
-* Publishing
+** Publishing
 Once we move to the structured docs phase of this project before publishing, we
 can delete the above section of this document. When we have a reasonable number
 of docs, lets publish it.
-* Contributions
+** Contributions
 Feel free to make a PR and contribute. Create a new file in the main repo folder
 and create a PR.
 
