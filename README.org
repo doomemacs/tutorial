@@ -1,2 +1,42 @@
 #+TITLE: DOOM Interactive Org Docs
 
+* What is it?
+Using org-mode we can create an interactive guide to doom and emacs that helps
+users really learn the workflows to be productive in doom. It's really important
+they get that ":bulb: aha!" moment where they see that everything in emacs is
+going to be a var, a function, or specifying when to set a var or function. This
+interactive guide should showcase the cause → effect relationship.
+* The Plan
+1. Collect the docs pretty loosely and focus on containing as many small but meaningful files as possible
+2. Reorgnaize those smaller docs into larger structured files
+3. Publish
+* Organization
+How often have you opened a new file then found it difficult to think through
+what to put down and how to organize it? Rather than trying to come up with a
+structure then shove everything into it, lets collect small but meaningful
+ideas, each complete lesson or idea is a single file and link between them when
+relevant. Then after a few are collected we can organized more structured, final
+doc for it.
+- This allows us to collect notes freely as ideas and requests come up
+- Then review and organize based on what we actually have instead of make those
+  decisions ahead of time
+- Once we have a good base, we can start just collecting additions into their
+  structured docs
+- Might be worth considering using this folder as a separate org-roam directory
+* Publishing
+Once we move to the structured docs phase of this project before publishing, we
+can delete the above section of this document. When we have a reasonable number
+of docs, lets publish it.
+* Contributions
+Feel free to make a PR and contribute. Create a new file in the main repo folder
+and create a PR.
+
+Please follow these guidelines:
+1. Look for a similar note first. Use the org search features or =SPC f f= to
+   find a note your additions could go into.
+2. Make it interactive! We want users to play around and get that "aha!" moment
+   where they understand the relationship between smaller code snippets and vars
+   that make up the entirety of emacs
+3. Showing is better than telling
+4. Be sure to cite your sources. Doesn't need to be academic quality but a URL
+   or credit would be a good idea.
